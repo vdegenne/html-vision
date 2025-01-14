@@ -1,6 +1,6 @@
 {
 	"name": "html-vision",
-	"version": "0.1.2",
+	"version": "0.1.3",
 	"description": "A set of utility functions for html",
 	"type": "module",
 	"exports": {
