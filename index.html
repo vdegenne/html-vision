@@ -1,0 +1,9 @@
+<body></body>
+<script type="module">
+	import {getElement} from './src/index.ts';
+	try {
+		await getElement('#ok', 2000, 100);
+	} catch (error) {
+		console.log(error);
+	}
+</script>

@@ -1,0 +1,38 @@
+{
+	"name": "html-vision",
+	"version": "0.1.0",
+	"description": "A set of utility functions for html",
+	"type": "module",
+	"exports": {
+		".": {
+			"default": "./lib/index.js",
+			"types": "./lib/index.d.ts"
+		}
+	},
+	"devDependencies": {
+		"tslib": "^2.8.1",
+		"typescript": "^5.6.3",
+		"vite": "^6.0.7",
+		"wireit": "^0.14.9"
+	},
+	"scripts": {
+		"build": "wireit"
+	},
+	"wireit": {
+		"build": {
+			"command": "tsc --pretty",
+			"clean": "if-file-deleted",
+			"files": [
+				"src",
+				"tsconfig.json"
+			],
+			"output": [
+				"lib"
+			]
+		}
+	},
+	"files": [
+		"./lib/index.js",
+		"./lib/index.d.ts"
+	]
+}
