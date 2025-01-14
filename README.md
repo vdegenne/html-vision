@@ -24,7 +24,7 @@ Similar to `document.querySelector` but will pass through shadow hosts (custom e
 ```ts
 import {cquerySelector, cquerySelectorAll} from 'html-vision';
 
-const lis = querySelectorAll('li');
+const lis = cquerySelectorAll('li');
 lis.length; // output: 4
 ```
 
