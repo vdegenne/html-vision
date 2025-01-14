@@ -43,7 +43,7 @@ try {
 
 ### scrollIfNeeded
 
-Scroll to an element to center of the screen if not in the view yet.
+Scroll an element in the center of the screen if not in the view yet.
 
 ## Installation
 
