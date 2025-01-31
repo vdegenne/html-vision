@@ -8,7 +8,7 @@ const defaultScrollIntoViewOptions: ScrollIntoViewOptions = {
  */
 export function scrollIfNeeded(
 	element: HTMLElement,
-	scrollOptions: Partial<ScrollIntoViewOptions>,
+	scrollOptions?: Partial<ScrollIntoViewOptions>,
 ) {
 	scrollOptions = Object.assign(
 		{},
