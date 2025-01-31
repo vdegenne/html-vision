@@ -1,10 +1,20 @@
+const defaultScrollIntoViewOptions: ScrollIntoViewOptions = {
+	behavior: 'smooth',
+	inline: 'center',
+	block: 'center',
+};
 /**
  * Scroll an element if it's not into view yet.
  */
 export function scrollIfNeeded(
 	element: HTMLElement,
-	behavior: ScrollBehavior = 'smooth',
+	scrollOptions: Partial<ScrollIntoViewOptions>,
 ) {
+	scrollOptions = Object.assign(
+		{},
+		defaultScrollIntoViewOptions,
+		scrollOptions,
+	);
 	const rect = element.getBoundingClientRect();
 	const isInView =
 		rect.top >= 0 &&
@@ -14,10 +24,6 @@ export function scrollIfNeeded(
 		rect.right <= (window.innerWidth || document.documentElement.clientWidth);
 
 	if (!isInView) {
-		element.scrollIntoView({
-			behavior,
-			inline: 'center',
-			block: 'center',
-		});
+		element.scrollIntoView(scrollOptions);
 	}
 }
