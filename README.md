@@ -34,7 +34,10 @@ Similar to `document.querySelector` but if the element doesn't exist yet, it wil
 
 ```js
 try {
-	const element = await getElement('#important-element', 2000, 500); // Checks every 500ms (default)
+	const element = await getElement('#important-element', {
+		timeoutMs: 2000, // after 2s of not finding, reject.
+		pollMs: 500, // checks every 500ms (default)
+	});
 	// element is now available, do something
 } catch {
 	// Error: The element couldn't be found after 2s of searching
