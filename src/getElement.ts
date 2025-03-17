@@ -59,9 +59,7 @@ export async function getElement(
 		let elapsed = 0;
 		const poll = () => {
 			const elements = cquerySelectorAll(selector);
-			const element = elements.find((element) =>
-				_options.refinedSearch(element),
-			);
+			const element = elements.find(_options.refinedSearch);
 			if (element) {
 				return resolve(element as HTMLElement);
 			}
