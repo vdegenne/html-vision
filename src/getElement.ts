@@ -1,17 +1,18 @@
 import {cquerySelectorAll} from './cqueries.js';
+import {sleep} from './utils.js';
 
 interface GetElementOptions {
 	/**
-	 * Timeout (in ms) after which the promise will reject. Use 0 for no timeout.
+	 * Timeout (in ms) after which the promise will reject. Use -1 for infinite search.
 	 *
 	 * @default 0
 	 */
 	timeoutMs: number;
 
 	/**
-	 * Decrease this value for better reactivity at the cost of performance, small values are not recommended.
+	 * Approaching zero gives better reactivity at the cost of performance.
 	 *
-	 * @default 500
+	 * @default 0
 	 */
 	pollMs: number;
 
@@ -42,29 +43,30 @@ interface GetElementOptions {
  *
  * @return The html element if found or reject.
  */
-export async function getElement(
+export async function getElement<T extends HTMLElement>(
 	selector: string,
 	options?: Partial<GetElementOptions>,
-) {
+): Promise<T> {
 	const _options: GetElementOptions = {
 		timeoutMs: 0,
-		pollMs: 500,
+		pollMs: 0,
 		refinedSearch() {
 			return true;
 		},
 		...options,
 	};
-	return new Promise<HTMLElement>((resolve, reject) => {
+
+	return new Promise<T>((resolve, reject) => {
 		const start = Date.now();
 		let elapsed = 0;
-		const poll = () => {
+		const poll = async () => {
 			const elements = cquerySelectorAll(selector);
 			const element = elements.find(_options.refinedSearch);
 			if (element) {
-				return resolve(element as HTMLElement);
+				return resolve(element as T);
 			}
 
-			if (_options.timeoutMs > 0) {
+			if (_options.timeoutMs >= 0) {
 				elapsed = Date.now() - start;
 				if (elapsed >= _options.timeoutMs) {
 					return reject(
@@ -73,8 +75,10 @@ export async function getElement(
 				}
 			}
 
-			setTimeout(poll, _options.pollMs);
+			await sleep(_options.pollMs);
+			requestAnimationFrame(poll);
 		};
-		poll();
+
+		requestAnimationFrame(poll);
 	});
 }
