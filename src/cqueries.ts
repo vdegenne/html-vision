@@ -51,11 +51,11 @@ export const cquerySelectorAll = querySelectorAll;
 export function querySelector<K extends keyof HTMLElementTagNameMap>(
 	selector: K,
 	from?: Element | Document,
-): HTMLElementTagNameMap[K];
+): HTMLElementTagNameMap[K] | null;
 export function querySelector<E extends Element = HTMLElement>(
 	selector: string,
 	from?: Element | Document,
-): E;
+): E | null;
 export function querySelector(selector: string, from = document): Element {
 	return querySelectorAll(selector, from)[0];
 }
