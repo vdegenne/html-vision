@@ -43,6 +43,14 @@ interface GetElementOptions {
  *
  * @return The html element if found or reject.
  */
+export async function getElement<K extends keyof HTMLElementTagNameMap>(
+	selector: K,
+	options?: Partial<GetElementOptions>,
+): Promise<HTMLElementTagNameMap[K]>;
+export async function getElement<T extends HTMLElement>(
+	selector: string,
+	options?: Partial<GetElementOptions>,
+): Promise<T>;
 export async function getElement<T extends HTMLElement>(
 	selector: string,
 	options?: Partial<GetElementOptions>,
