@@ -1,6 +1,6 @@
 {
 	"name": "html-vision",
-	"version": "0.3.4",
+	"version": "0.3.5",
 	"description": "A set of utility functions for html",
 	"type": "module",
 	"exports": {
@@ -11,6 +11,10 @@
 		"./click.js": {
 			"default": "./lib/click.js",
 			"types": "./lib/click.d.ts"
+		},
+		"./ss.js": {
+			"import": "./lib/ss.js",
+			"types": "./lib/ss.d.ts"
 		}
 	},
 	"devDependencies": {
