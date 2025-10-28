@@ -1,5 +1,6 @@
 export class SS {
 	#ss = new CSSStyleSheet();
+	#active = false;
 
 	constructor(
 		protected documentOrCustomElement: Document | ShadowRoot,
@@ -11,10 +12,16 @@ export class SS {
 
 	on() {
 		this.#ss.replaceSync(this.styles);
+		this.#active = true;
 	}
 
 	off() {
 		this.#ss.replaceSync('');
+		this.#active = false;
+	}
+
+	toggle() {
+		this.#active ? this.off() : this.on();
 	}
 
 	apply() {
