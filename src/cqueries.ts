@@ -1,11 +1,11 @@
 // Function to recursively find all elements with shadow DOMs
 function getAllShadowHosts(
-	root: Document | ShadowRoot = document,
+	from: Document | ShadowRoot = document,
 ): HTMLElement[] {
 	let shadowHosts: HTMLElement[] = [];
 
 	// Find all elements in the current root (document or shadow root)
-	const elements = root.querySelectorAll<HTMLElement>('*');
+	const elements = from.querySelectorAll<HTMLElement>('*');
 
 	elements.forEach((element) => {
 		if (element.shadowRoot) {
@@ -32,13 +32,12 @@ export function querySelectorAll(selector: string, from = document) {
 	let results: Element[] = Array.from(from.querySelectorAll(selector));
 
 	// Get all shadow hosts and query within their shadow DOMs
-	const shadowHosts = getAllShadowHosts();
+	const shadowHosts = getAllShadowHosts(from);
 	shadowHosts.forEach((host) => {
 		const shadowRoot = host.shadowRoot;
 		if (shadowRoot) {
-			results = results.concat(
-				Array.from(shadowRoot.querySelectorAll(selector)),
-			);
+			(Array.from(shadowRoot.querySelectorAll(selector)),
+				(results = results.concat()));
 		}
 	});
 
