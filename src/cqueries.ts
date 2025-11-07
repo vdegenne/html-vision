@@ -30,14 +30,14 @@ export function querySelectorAll<E extends Element = HTMLElement>(
 export function querySelectorAll(selector: string, from = document) {
 	// Start by querying in the document
 	let results: Element[] = Array.from(from.querySelectorAll(selector));
-
 	// Get all shadow hosts and query within their shadow DOMs
 	const shadowHosts = getAllShadowHosts(from);
 	shadowHosts.forEach((host) => {
 		const shadowRoot = host.shadowRoot;
 		if (shadowRoot) {
-			(Array.from(shadowRoot.querySelectorAll(selector)),
-				(results = results.concat()));
+			results = results.concat(
+				Array.from(shadowRoot.querySelectorAll(selector)),
+			);
 		}
 	});
 
