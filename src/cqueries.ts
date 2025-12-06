@@ -21,17 +21,21 @@ function getAllShadowHosts(
 // Function to query elements in the document and all shadow DOMs
 export function querySelectorAll<K extends keyof HTMLElementTagNameMap>(
 	selector: K,
-	from?: Element | Document,
+	from?: HTMLElement | Document,
 ): HTMLElementTagNameMap[K][];
 export function querySelectorAll<E extends Element = HTMLElement>(
 	selector: string,
-	from?: Element | Document,
+	from?: HTMLElement | Document,
 ): E[];
-export function querySelectorAll(selector: string, from = document) {
-	// Start by querying in the document
+export function querySelectorAll(
+	selector: string,
+	from: HTMLElement | Document = document,
+) {
 	let results: Element[] = Array.from(from.querySelectorAll(selector));
 	// Get all shadow hosts and query within their shadow DOMs
-	const shadowHosts = getAllShadowHosts(from);
+	const shadowHosts = getAllShadowHosts(
+		'shadowRoot' in from ? from.shadowRoot : from,
+	);
 	shadowHosts.forEach((host) => {
 		const shadowRoot = host.shadowRoot;
 		if (shadowRoot) {
@@ -49,13 +53,13 @@ export const cquerySelectorAll = querySelectorAll;
 
 export function querySelector<K extends keyof HTMLElementTagNameMap>(
 	selector: K,
-	from?: Element | Document,
+	from?: HTMLElement | Document,
 ): HTMLElementTagNameMap[K] | null;
 export function querySelector<E extends Element = HTMLElement>(
 	selector: string,
-	from?: Element | Document,
+	from?: HTMLElement | Document,
 ): E | null;
-export function querySelector(selector: string, from = document): Element {
+export function querySelector(selector: string, from = document): HTMLElement {
 	return querySelectorAll(selector, from)[0];
 }
 
