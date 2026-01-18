@@ -1,6 +1,6 @@
 {
 	"name": "html-vision",
-	"version": "0.3.9",
+	"version": "0.3.10",
 	"description": "A set of utility functions for html",
 	"type": "module",
 	"exports": {
@@ -15,6 +15,10 @@
 		"./ss.js": {
 			"import": "./lib/ss.js",
 			"types": "./lib/ss.d.ts"
+		},
+		"./getActiveElement.js": {
+			"import": "./lib/getActiveElement.js",
+			"types": "./lib/getActiveElement.d.ts"
 		}
 	},
 	"devDependencies": {
