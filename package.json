@@ -1,6 +1,6 @@
 {
 	"name": "html-vision",
-	"version": "0.3.10",
+	"version": "0.3.11",
 	"description": "A set of utility functions for html",
 	"type": "module",
 	"exports": {
@@ -19,14 +19,22 @@
 		"./getActiveElement.js": {
 			"import": "./lib/getActiveElement.js",
 			"types": "./lib/getActiveElement.d.ts"
+		},
+		"./visibility.js": {
+			"import": "./lib/visibility.js",
+			"types": "./lib/visibility.d.ts"
+		},
+		"./scroll.js": {
+			"import": "./lib/scroll.js",
+			"types": "./lib/scroll.d.ts"
 		}
 	},
 	"devDependencies": {
-		"@vdegenne/mini-gamepad": "^0.4.6",
+		"@vdegenne/mini-gamepad": "^0.4.17",
 		"tslib": "^2.8.1",
-		"typescript": "^5.6.3",
-		"vite": "^6.0.7",
-		"wireit": "^0.14.9"
+		"typescript": "^7.0.2",
+		"vite": "^8.2.0",
+		"wireit": "^0.14.13"
 	},
 	"scripts": {
 		"build": "wireit"
