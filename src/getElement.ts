@@ -1,4 +1,4 @@
-import {cquerySelectorAll} from './cqueries.js';
+import {$$} from './queries.js';
 import {sleep} from './utils.js';
 
 interface GetElementOptions {
@@ -68,7 +68,7 @@ export async function getElement<T extends HTMLElement>(
 		const start = Date.now();
 		let elapsed = 0;
 		const poll = async () => {
-			const elements = cquerySelectorAll(selector);
+			const elements = $$(selector, {shadows: true});
 			const element = elements.find(_options.refinedSearch);
 			if (element) {
 				return resolve(element as T);
