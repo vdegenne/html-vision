@@ -1,15 +1,19 @@
 {
 	"name": "html-vision",
-	"version": "0.3.11",
+	"version": "0.3.12",
 	"description": "A set of utility functions for html",
 	"type": "module",
 	"exports": {
 		".": {
-			"default": "./lib/index.js",
+			"import": "./lib/index.js",
 			"types": "./lib/index.d.ts"
 		},
+		"./queries.js": {
+			"import": "./lib/cqueries.js",
+			"types": "./lib/cqueries.d.ts"
+		},
 		"./click.js": {
-			"default": "./lib/click.js",
+			"import": "./lib/click.js",
 			"types": "./lib/click.d.ts"
 		},
 		"./ss.js": {
