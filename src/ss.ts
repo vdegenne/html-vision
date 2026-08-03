@@ -5,11 +5,11 @@ export class SS {
 	#active = false;
 
 	constructor(
-		protected documentOrCustomElement: Document | ShadowRoot,
 		protected styles: string | CSSResult,
+		protected documentOrCustomElement: Document | ShadowRoot = document,
 	) {
 		this.on();
-		this.apply();
+		this.adopt();
 	}
 
 	on() {
@@ -29,13 +29,13 @@ export class SS {
 		this.#active ? this.off() : this.on();
 	}
 
-	apply() {
-		this.remove();
+	adopt() {
+		this.detach();
 
 		this.documentOrCustomElement.adoptedStyleSheets.push(this.#ss);
 	}
 
-	remove() {
+	detach() {
 		this.documentOrCustomElement.adoptedStyleSheets.splice(
 			this.documentOrCustomElement.adoptedStyleSheets.indexOf(this.#ss) >>> 0,
 			1,

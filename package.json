@@ -1,6 +1,6 @@
 {
 	"name": "html-vision",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "A set of utility functions for html",
 	"type": "module",
 	"exports": {
@@ -31,6 +31,10 @@
 		"./scroll.js": {
 			"import": "./lib/scroll.js",
 			"types": "./lib/scroll.d.ts"
+		},
+		"./highlight.js": {
+			"import": "./lib/highlight.js",
+			"types": "./lib/highlight.d.ts"
 		}
 	},
 	"scripts": {
