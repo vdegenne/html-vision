@@ -1,6 +1,6 @@
 {
 	"name": "html-vision",
-	"version": "1.0.4",
+	"version": "1.0.5",
 	"description": "A set of utility functions for html",
 	"type": "module",
 	"exports": {
@@ -36,7 +36,7 @@
 			"import": "./lib/highlight.js",
 			"types": "./lib/highlight.d.ts"
 		},
-		"./tab.js": {
+		"./tabbing.js": {
 			"import": "./lib/tabbing.js",
 			"types": "./lib/tabbing.d.ts"
 		}
