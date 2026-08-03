@@ -1,17 +1,22 @@
+import type {CSSResult} from 'lit';
+
 export class SS {
 	#ss = new CSSStyleSheet();
 	#active = false;
 
 	constructor(
 		protected documentOrCustomElement: Document | ShadowRoot,
-		protected styles: string,
+		protected styles: string | CSSResult,
 	) {
 		this.on();
 		this.apply();
 	}
 
 	on() {
-		this.#ss.replaceSync(this.styles);
+		this.#ss.replaceSync(
+			typeof this.styles === 'string' ? this.styles : this.styles.cssText,
+		);
+
 		this.#active = true;
 	}
 
@@ -26,6 +31,7 @@ export class SS {
 
 	apply() {
 		this.remove();
+
 		this.documentOrCustomElement.adoptedStyleSheets.push(this.#ss);
 	}
 

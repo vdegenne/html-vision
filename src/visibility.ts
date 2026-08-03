@@ -63,3 +63,48 @@ export function visibilityCheck(
 export function isInViewport(el: HTMLElement) {
 	return visibilityCheck(el, (is) => is('partially-visible'));
 }
+
+export function isElementObstructed(el: Element | null): boolean {
+	if (!el) return true;
+
+	let current: Element | null = el;
+
+	while (current) {
+		const style = getComputedStyle(current);
+
+		if (
+			style.display === 'none' ||
+			style.visibility === 'hidden' ||
+			style.visibility === 'collapse' ||
+			parseFloat(style.opacity) === 0
+		) {
+			return true;
+		}
+
+		current = current.parentElement;
+	}
+
+	const rect = el.getBoundingClientRect();
+
+	if (rect.width === 0 || rect.height === 0) {
+		return true;
+	}
+
+	const points: [number, number][] = [
+		[rect.left + rect.width / 2, rect.top + rect.height / 2],
+		[rect.left + 1, rect.top + 1],
+		[rect.right - 1, rect.bottom - 1],
+	];
+
+	for (const [x, y] of points) {
+		const elements = document.elementsFromPoint(x, y);
+
+		const index = elements.findIndex((e) => e === el || el.contains(e));
+
+		if (index > 0) {
+			return true;
+		}
+	}
+
+	return false;
+}

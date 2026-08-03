@@ -1,3 +1,4 @@
+import {Debouncer} from '@vdegenne/debouncer';
 import {CheckIf, visibilityCheck} from './visibility.js';
 
 export interface ScrollStrategy {
@@ -26,6 +27,7 @@ export interface ScrollStrategy {
 	 */
 	yOffsetPx: number;
 }
+
 export const scrollStrategyDefaults: ScrollStrategy = {
 	if: (is) => !is('top-visible'),
 	behavior: 'smooth',
@@ -90,4 +92,21 @@ export function scrollIntoView(
 		top: top - yOffsetPx,
 		behavior,
 	});
+}
+
+export function onScrollDebounced(
+	callback: (event: Event) => void,
+	timeoutMs = 200,
+): Debouncer {
+	const debouncer = new Debouncer((event: Event) => {
+		callback(event);
+	}, timeoutMs);
+
+	function listener(event: Event) {
+		debouncer.call(event);
+	}
+
+	window.addEventListener('scroll', listener);
+
+	return debouncer;
 }
