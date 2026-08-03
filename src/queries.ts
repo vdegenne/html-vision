@@ -21,14 +21,12 @@ function getAllShadowHosts(
 	from: Document | ShadowRoot = document,
 	shadowHosts: HTMLElement[] = [],
 ): HTMLElement[] {
-	const elements = from.querySelectorAll<HTMLElement>('*');
-
-	elements.forEach((element) => {
+	for (const element of from.querySelectorAll<HTMLElement>('*')) {
 		if (element.shadowRoot) {
 			shadowHosts.push(element);
 			getAllShadowHosts(element.shadowRoot, shadowHosts);
 		}
-	});
+	}
 
 	return shadowHosts;
 }
